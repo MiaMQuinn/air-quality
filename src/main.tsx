@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 
-// const [location, setLocation] = useState("City of London, England");
-
 const Box = () => {
   return (
     <div className="bg-white shadow rounded-lg p-6 flex flex-col items-center">
