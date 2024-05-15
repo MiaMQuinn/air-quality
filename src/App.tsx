@@ -2,6 +2,8 @@ import * as React from 'react';
 import { getLocation } from './services/location';
 import { getAirData } from './services/airData';
 
+import BoxComponent from './BoxComponent';
+
 function App() {
   const [location, setLocation] = React.useState('');
   const [airData, setAirData] = React.useState({});
@@ -37,12 +39,25 @@ function App() {
 
   return (
     <div id="template-text">
-      {/* <h1>React Starter Template - TypeScript</h1>
-      <p>
-        For JavaScript please use{" "}
-        <a href="https://github.com/ruairidhflint/react-template">this</a>{" "}
-        template
-      </p> */}
+      <div id="large-text"  className="text-right mr-10">
+      {location}
+      </div>
+
+    <div className="grid grid-cols-1 m-20">
+      <div className="text-9xl text-teal-400 font-bold m-auto">
+        20
+      </div>
+      <div className="text-3xl text-teal-400 font-bold m-auto">
+        Fair
+      </div>
+      <div id="large-text" className="m-auto">
+        Air quality
+      </div>
+
+      <div className="grid grid-cols-4 gap-4">
+        <BoxComponent data={airData}/>
+      </div>
+    </div>
     </div>
   );
 }
