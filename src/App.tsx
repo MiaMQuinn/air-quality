@@ -1,17 +1,19 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getLocation } from './services/location';
 import { getAirData } from './services/airData';
 
 import BoxComponent from './BoxComponent';
 
 function App() {
+  const navigate = useNavigate();
   const [location, setLocation] = React.useState('');
   const [airData, setAirData] = React.useState({});
   console.log(location);
   console.log(airData);
 
   React.useEffect(() => {
-    navigator.geolocation.getCurrentPosition((position) => {
+    const success = (position: GeolocationPosition) => {
       const coords = position.coords;
 
       const fetchLocation = async () => {
@@ -34,7 +36,14 @@ function App() {
   
       fetchLocation();
       fetchAirData();
-    });
+    }
+
+    const error = () => {
+      console.log('hello');
+      navigate('/location-disabled');
+    }
+
+    navigator.geolocation.getCurrentPosition(success, error);
   }, []);
 
   return (
