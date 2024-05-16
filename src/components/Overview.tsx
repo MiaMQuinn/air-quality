@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as airService from '../services/air';
 import BoxComponent from './BoxComponent';
 import { getTwelveHourTime } from '../utils/getTwelveHourTime';
+import { changeColour } from '../utils/changeColour';
 import { AirData } from '../types/airData';
 import { useLocation } from './App';
 
@@ -59,18 +60,18 @@ function Overview() {
           <hr className="my-4 h-0.5 border-t-0 dark:bg-white/10" />
     
           <div className="grid grid-cols-4 gap-7 mx-32">
-            <BoxComponent data={airData?.current?.pm10} units={"PM10"}/>
-            <BoxComponent data={airData?.current?.pm2_5} units={"PM2.5"}/>
-            <BoxComponent data={airData?.current?.carbon_monoxide} units={"CO"}/>
-            <BoxComponent data={airData?.current?.nitrogen_dioxide} units={"NO2"}/>
-            <BoxComponent data={airData?.current?.sulphur_dioxide} units={"SO2"}/>
-            <BoxComponent data={airData?.current?.ozone} units={"O3"}/>
-            <BoxComponent data={airData?.current?.uv_index} units={"UV"}/>
-            <BoxComponent data={airData?.current?.grass_pollen} units={"Pollen"}/>
+            <BoxComponent data={airData?.current?.pm10} units={"PM10"} colour={changeColour("pm10", 10.6)}/>
+            <BoxComponent data={airData?.current?.pm2_5} units={"PM2.5"} colour={changeColour("pm2_5", 10.6)}/>
+            <BoxComponent data={airData?.current?.carbon_monoxide} units={"CO"} colour={changeColour("carbon_monoxide", 10.6)}/>
+            <BoxComponent data={airData?.current?.nitrogen_dioxide} units={"NO2"} colour={changeColour("nitrogen_dioxide", 10.6)}/>
+            <BoxComponent data={airData?.current?.sulphur_dioxide} units={"SO2"} colour={changeColour("sulphur_dioxide", 10.6)}/>
+            <BoxComponent data={airData?.current?.ozone} units={"O3"} colour={changeColour("ozone", 10.6)}/>
+            <BoxComponent data={airData?.current?.uv_index} units={"UV"} colour={changeColour("uv_index", 10.6)}/>
+            <BoxComponent data={airData?.current?.grass_pollen} units={"Pollen"} colour={changeColour("grass_pollen", 10.6)}/>
           </div>
         </div>
         </div>
       );
-};
+}
 
 export default Overview;
