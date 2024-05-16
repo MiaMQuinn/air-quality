@@ -55,7 +55,9 @@ function App() {
         Air quality
       </div>
 
-      <div className="grid grid-cols-4 gap-4">
+      <hr className="my-4 h-0.5 border-t-0 dark:bg-white/10" />
+
+      <div className="grid grid-cols-4 gap-7 mx-32">
         <BoxComponent data={airData?.current.pm10} units={"PM10"}/>
         <BoxComponent data={airData?.current.pm2_5} units={"PM2.5"}/>
         <BoxComponent data={airData?.current.carbon_monoxide} units={"CO"}/>
