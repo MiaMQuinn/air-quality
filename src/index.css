@@ -73,12 +73,17 @@ h6 {
   padding: 0;
 }
 
+#small-text{
+  @apply text-sm;
+  @apply text-gray-600
+}
+
 #default-text{
   @apply text-base;
-  @apply text-gray-800
+  @apply text-gray-600
 }
 
 #large-text{
   @apply text-lg;
-  @apply text-gray-800
+  @apply text-gray-600
 }

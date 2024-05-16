@@ -46,7 +46,7 @@ function App() {
 
     <div className="grid grid-cols-1 m-20">
       <div className="text-9xl text-teal-400 font-bold m-auto">
-        20
+        {airData?.current.european_aqi}
       </div>
       <div className="text-3xl text-teal-400 font-bold m-auto">
         Fair
