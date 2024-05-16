@@ -5,14 +5,15 @@ import * as airService from './services/air';
 
 import BoxComponent from './BoxComponent';
 import { getTwelveHourTime } from './utils/getTwelveHourTime';
+import { AirData } from './types/airData';
 
 function App() {
   const navigate = useNavigate();
   const [location, setLocation] = React.useState('');
-  const [airData, setAirData] = React.useState({});
+  const [airData, setAirData] = React.useState<AirData|null>(null);
   console.log(location);
   console.log(airData);
-
+  
   React.useEffect(() => {
     const success = (position: GeolocationPosition) => {
       const coords = position.coords;
@@ -71,7 +72,7 @@ function App() {
 
     <div className="grid grid-cols-1 m-20">
       <div className="text-9xl text-teal-400 font-bold m-auto">
-        20
+        {airData?.current?.european_aqi}
       </div>
       <div className="text-3xl text-teal-400 font-bold m-auto">
         Fair
@@ -80,8 +81,17 @@ function App() {
         Air quality
       </div>
 
-      <div className="grid grid-cols-4 gap-4">
-        <BoxComponent data={airData}/>
+      <hr className="my-4 h-0.5 border-t-0 dark:bg-white/10" />
+
+      <div className="grid grid-cols-4 gap-7 mx-32">
+        <BoxComponent data={airData?.current?.pm10} units={"PM10"}/>
+        <BoxComponent data={airData?.current?.pm2_5} units={"PM2.5"}/>
+        <BoxComponent data={airData?.current?.carbon_monoxide} units={"CO"}/>
+        <BoxComponent data={airData?.current?.nitrogen_dioxide} units={"NO2"}/>
+        <BoxComponent data={airData?.current?.sulphur_dioxide} units={"SO2"}/>
+        <BoxComponent data={airData?.current?.ozone} units={"O3"}/>
+        <BoxComponent data={airData?.current?.uv_index} units={"UV"}/>
+        <BoxComponent data={airData?.current?.grass_pollen} units={"Pollen"}/>
       </div>
     </div>
     </div>
