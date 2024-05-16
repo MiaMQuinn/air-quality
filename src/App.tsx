@@ -3,13 +3,14 @@ import { getLocation } from './services/location';
 import { getAirData } from './services/airData';
 
 import BoxComponent from './BoxComponent';
+import { AirData } from './types';
 
 function App() {
   const [location, setLocation] = React.useState('');
-  const [airData, setAirData] = React.useState({});
+  const [airData, setAirData] = React.useState<AirData|null>(null);
   console.log(location);
   console.log(airData);
-
+  
   React.useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       const coords = position.coords;
@@ -55,7 +56,14 @@ function App() {
       </div>
 
       <div className="grid grid-cols-4 gap-4">
-        <BoxComponent data={airData}/>
+        <BoxComponent data={airData?.current.pm10} units={"PM10"}/>
+        <BoxComponent data={airData?.current.pm2_5} units={"PM2.5"}/>
+        <BoxComponent data={airData?.current.carbon_monoxide} units={"CO"}/>
+        <BoxComponent data={airData?.current.nitrogen_dioxide} units={"NO2"}/>
+        <BoxComponent data={airData?.current.sulphur_dioxide} units={"SO2"}/>
+        <BoxComponent data={airData?.current.ozone} units={"O3"}/>
+        <BoxComponent data={airData?.current.uv_index} units={"UV"}/>
+        <BoxComponent data={airData?.current.grass_pollen} units={"Pollen"}/>
       </div>
     </div>
     </div>
