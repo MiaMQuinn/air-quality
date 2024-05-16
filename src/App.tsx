@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getLocation } from './services/location';
-import { getAirData } from './services/airData';
+import * as airService from './services/air';
 
 import BoxComponent from './BoxComponent';
+import { getTwelveHourTime } from './utils/getTwelveHourTime';
 
 function App() {
   const navigate = useNavigate();
@@ -25,17 +26,33 @@ function App() {
         }
       };
 
-      const fetchAirData = async () => {
+      const fetchAllAirData = async () => {
         try {
-          const fetchedAirData = await getAirData(coords.latitude, coords.longitude);
+          const fetchedAirData = await airService.getAll(coords.latitude, coords.longitude);
           setAirData(fetchedAirData);
         } catch (e) {
           console.log('Error fetching air data');
         }
       }
+
+      // TEST: DELETE LATER
+      const fetchHourlyAirData = async () => {
+        try {
+          const fetchedAirData = await airService.getHourly(coords.latitude, coords.longitude, 'pm10');
+          console.log('Hourly:', fetchedAirData);
+          if (fetchedAirData.hourly) {
+            const hours = fetchedAirData.hourly.time;
+            const times = hours.map(getTwelveHourTime);
+            console.log(times);
+          }
+        } catch (e) {
+          console.log('Error fetching hourly data');
+        }
+      }
   
       fetchLocation();
-      fetchAirData();
+      fetchAllAirData();
+      fetchHourlyAirData();
     }
 
     const error = () => {
