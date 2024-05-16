@@ -53,10 +53,10 @@ function Overview() {
           <div style={{color:changeColour("european_aqi", airData?.current?.european_aqi)}} className="text-9xl text-teal-400 font-bold m-auto">
             {airData?.current?.european_aqi}
           </div>
-          <div style={{color:changeColour("european_aqi", airData?.current?.european_aqi)}}className="text-3xl text-teal-400 font-bold m-auto">
+          <div style={{color:changeColour("european_aqi", airData?.current?.european_aqi)}}className="inter-font text-3xl text-teal-400 font-bold m-auto">
             {airQualityComment(airQuality)}
           </div>
-          <div id="large-text" className="m-auto">
+          <div id="large-text" className="inter-font m-auto">
             Air quality
           </div>
     
