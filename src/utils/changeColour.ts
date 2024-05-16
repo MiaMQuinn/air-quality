@@ -20,11 +20,11 @@ export const changeColour = (pollutant: string, value:number): string => {
     const values = dictionary[pollutant];
     let colour: string = "";
     if(value < values[0]){
-        colour = "green";
+        colour = "rgb(16 185 129)";
     }else if(value < values[1]){
-        colour = "amber";
+        colour = "rgb(250 204 21)";
     }else{
-        colour = "red";
+        colour = "rgb(239 68 68)";
     }
     return colour;
 }
