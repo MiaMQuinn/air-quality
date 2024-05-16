@@ -1,6 +1,8 @@
+import {pollutantDictionary} from './pollutantDictionary';
+
 export const airQualityComment = (aqi: number): string =>{
+    const values = pollutantDictionary["european_aqi"];
     let result = "test";
-    const values = [30, 40, 50];
 
     if(Math.abs(aqi) < values[0]){
         result = "fair"
