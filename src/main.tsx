@@ -5,12 +5,19 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import './index.css'
-import App from './App';
+import App from './components/App';
+import Overview from './components/Overview';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />
+    element: <App />,
+    children: [
+      {
+        path: 'overview',
+        element: <Overview />,
+      }
+    ]
   },
   {
     path: '/location-disabled',
