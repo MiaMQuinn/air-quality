@@ -5,10 +5,12 @@ import { getTwelveHourTime } from '../utils/getTwelveHourTime';
 import { changeColour } from '../utils/changeColour';
 import { AirData } from '../types/airData';
 import { useLocation } from './App';
+import { airQualityComment } from '../utils/airQualityComment';
 
 function Overview() {
     const { location, lat, long} = useLocation();
     const [airData, setAirData] = React.useState<AirData|null>(null);
+    const [airQuality, setAirQuality] = React.useState<number>();
     console.log(location, lat, long);
 
     React.useEffect(() => {
@@ -16,6 +18,7 @@ function Overview() {
             try {
               const fetchedAirData = await airService.getAll(lat, long);
               setAirData(fetchedAirData);
+              setAirQuality(airData?.current?.european_aqi);
             } catch (e) {
               console.log('Error fetching air data');
             }
@@ -47,11 +50,11 @@ function Overview() {
           </div>
     
         <div className="grid grid-cols-1 m-20">
-          <div className="text-9xl text-teal-400 font-bold m-auto">
+          <div style={{color:changeColour("european_aqi", airData?.current?.european_aqi)}} className="text-9xl text-teal-400 font-bold m-auto">
             {airData?.current?.european_aqi}
           </div>
-          <div className="text-3xl text-teal-400 font-bold m-auto">
-            Fair
+          <div style={{color:changeColour("european_aqi", airData?.current?.european_aqi)}}className="text-3xl text-teal-400 font-bold m-auto">
+            {airQualityComment(airQuality)}
           </div>
           <div id="large-text" className="m-auto">
             Air quality
@@ -60,14 +63,14 @@ function Overview() {
           <hr className="my-4 h-0.5 border-t-0 dark:bg-white/10" />
     
           <div className="grid grid-cols-4 gap-7 mx-32">
-            <BoxComponent data={airData?.current?.pm10} units={"PM10"} colour={changeColour("pm10", 10.6)}/>
-            <BoxComponent data={airData?.current?.pm2_5} units={"PM2.5"} colour={changeColour("pm2_5", 10.6)}/>
-            <BoxComponent data={airData?.current?.carbon_monoxide} units={"CO"} colour={changeColour("carbon_monoxide", 10.6)}/>
-            <BoxComponent data={airData?.current?.nitrogen_dioxide} units={"NO2"} colour={changeColour("nitrogen_dioxide", 10.6)}/>
-            <BoxComponent data={airData?.current?.sulphur_dioxide} units={"SO2"} colour={changeColour("sulphur_dioxide", 10.6)}/>
-            <BoxComponent data={airData?.current?.ozone} units={"O3"} colour={changeColour("ozone", 10.6)}/>
-            <BoxComponent data={airData?.current?.uv_index} units={"UV"} colour={changeColour("uv_index", 10.6)}/>
-            <BoxComponent data={airData?.current?.grass_pollen} units={"Pollen"} colour={changeColour("grass_pollen", 10.6)}/>
+            <BoxComponent data={airData?.current?.pm10} units={"PM10"} colour={changeColour("pm10", airData?.current?.pm10)}/>
+            <BoxComponent data={airData?.current?.pm2_5} units={"PM2.5"} colour={changeColour("pm2_5", airData?.current?.pm2_5)}/>
+            <BoxComponent data={airData?.current?.carbon_monoxide} units={"CO"} colour={changeColour("carbon_monoxide", airData?.current?.carbon_monoxide)}/>
+            <BoxComponent data={airData?.current?.nitrogen_dioxide} units={"NO2"} colour={changeColour("nitrogen_dioxide", airData?.current?.nitrogen_dioxide)}/>
+            <BoxComponent data={airData?.current?.sulphur_dioxide} units={"SO2"} colour={changeColour("sulphur_dioxide", airData?.current?.sulphur_dioxide)}/>
+            <BoxComponent data={airData?.current?.ozone} units={"O3"} colour={changeColour("ozone", airData?.current?.ozone)}/>
+            <BoxComponent data={airData?.current?.uv_index} units={"UV"} colour={changeColour("uv_index", airData?.current?.uv_index)}/>
+            <BoxComponent data={airData?.current?.grass_pollen} units={"Pollen"} colour={changeColour("grass_pollen", airData?.current?.grass_pollen)}/>
           </div>
         </div>
         </div>
