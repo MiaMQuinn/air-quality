@@ -6,6 +6,7 @@ import { changeColour } from '../utils/changeColour';
 import { AirData } from '../types/airData';
 import { useLocation } from './App';
 import { airQualityComment } from '../utils/airQualityComment';
+import logo from './logo.png';
 
 function Overview() {
     const { location, lat, long} = useLocation();
@@ -48,12 +49,13 @@ function Overview() {
           <div id="large-text"  className="text-right mr-10">
           {location}
           </div>
+          <img src={logo} width={25} height={25} />
     
         <div className="grid grid-cols-1 m-20">
-          <div style={{color:changeColour("european_aqi", airData?.current?.european_aqi)}} className="text-9xl text-teal-400 font-bold m-auto">
+          <div style={{color:changeColour("european_aqi", airData?.current?.european_aqi)}} className="text-9xl font-bold m-auto">
             {airData?.current?.european_aqi}
           </div>
-          <div style={{color:changeColour("european_aqi", airData?.current?.european_aqi)}}className="inter-font text-3xl text-teal-400 font-bold m-auto">
+          <div style={{color:changeColour("european_aqi", airData?.current?.european_aqi)}}className="inter-font text-3xl font-bold m-auto">
             {airQualityComment(airQuality)}
           </div>
           <div id="large-text" className="inter-font m-auto">
