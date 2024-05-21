@@ -46,10 +46,14 @@ function Overview() {
 
     return (
         <div id="template-text">
-          <div id="large-text"  className="text-right mr-10">
-          {location}
+          <div className="flex float-right">
+            <div id="large-text"  className="mr-2">
+            {location}
+            </div>
+            <img src={logo} width={25} height={25} />
+
           </div>
-          <img src={logo} width={25} height={25} />
+          
     
         <div className="grid grid-cols-1 m-20">
           <div style={{color:changeColour("european_aqi", airData?.current?.european_aqi)}} className="text-9xl font-bold m-auto">
