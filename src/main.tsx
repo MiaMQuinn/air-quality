@@ -7,6 +7,7 @@ import {
 import './index.css'
 import App from './components/App';
 import Overview from './components/Overview';
+import SingleVariable from './components/SingleVariable';
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
         path: '',
         element: <Overview />,
       },
+      {
+        path: ':weatherVariable',
+        element: <SingleVariable />
+      }
     ]
   },
   {
