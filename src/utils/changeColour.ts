@@ -1,6 +1,10 @@
 import {pollutantDictionary} from './pollutantDictionary';
 
-export const changeColour = (pollutant: string, value:number) => {
+export const changeColour = (pollutant: string, value: number | undefined) => {
+    if (value === undefined) {
+        return "rgb(250 204 21)";
+    }
+
     const values = pollutantDictionary[pollutant];
     if(value < values[0]){
         return "rgb(16 185 129)";

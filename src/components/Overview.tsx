@@ -6,6 +6,7 @@ import { AirData } from '../types/airData';
 import { useLocation } from './App';
 import { airQualityComment } from '../utils/airQualityComment';
 import logo from './logo.png';
+import { Link } from 'react-router-dom';
 
 function Overview() {
     const { location, lat, long} = useLocation();
@@ -26,6 +27,14 @@ function Overview() {
     
           fetchAllAirData();
     }, [long, lat]);
+
+    const getData = (variableName: VariableKey) => {
+      if (variableName && airData?.current) {
+        return airData.current[variableName]
+      }
+
+      return;
+    };
 
     return (
         <div id="template-text">
@@ -52,18 +61,59 @@ function Overview() {
           <hr className="my-4 h-0.5 border-t-0 dark:bg-white/10" />
     
           <div className="grid grid-cols-4 gap-7 mx-32">
-            <BoxComponent data={airData?.current?.pm10} units={"PM10"} colour={changeColour("pm10", airData?.current?.pm10)}/>
-            <BoxComponent data={airData?.current?.pm2_5} units={"PM2.5"} colour={changeColour("pm2_5", airData?.current?.pm2_5)}/>
-            <BoxComponent data={airData?.current?.carbon_monoxide} units={"CO"} colour={changeColour("carbon_monoxide", airData?.current?.carbon_monoxide)}/>
-            <BoxComponent data={airData?.current?.nitrogen_dioxide} units={"NO2"} colour={changeColour("nitrogen_dioxide", airData?.current?.nitrogen_dioxide)}/>
-            <BoxComponent data={airData?.current?.sulphur_dioxide} units={"SO2"} colour={changeColour("sulphur_dioxide", airData?.current?.sulphur_dioxide)}/>
-            <BoxComponent data={airData?.current?.ozone} units={"O3"} colour={changeColour("ozone", airData?.current?.ozone)}/>
-            <BoxComponent data={airData?.current?.uv_index} units={"UV"} colour={changeColour("uv_index", airData?.current?.uv_index)}/>
-            <BoxComponent data={airData?.current?.grass_pollen} units={"Pollen"} colour={changeColour("grass_pollen", airData?.current?.grass_pollen)}/>
+            {
+              subVariables.map(variable =>
+                <Link to={variable.key}>
+                  <BoxComponent data={getData(variable.key)} units={variable.name} colour={changeColour(variable.key, getData(variable.key))}/>
+                </Link>
+              )
+            }
           </div>
         </div>
         </div>
       );
 }
+
+type VariableKey = "pm10" | "pm2_5" | "carbon_monoxide" | "nitrogen_dioxide" | "sulphur_dioxide" | "ozone" | "uv_index" | "grass_pollen";
+
+type Variable = {
+  name: string;
+  key: VariableKey;
+}
+
+const subVariables: Variable[] = [
+  {
+    name: "PM10",
+    key: "pm10",
+  },
+  {
+    name: "PM2.5",
+    key: "pm2_5",
+  },
+  {
+    name: "CO",
+    key: "carbon_monoxide",
+  },
+  {
+    name: "NO2",
+    key: "nitrogen_dioxide",
+  },
+  {
+    name: "SO2",
+    key: "sulphur_dioxide",
+  },
+  {
+    name: "O3",
+    key: "ozone",
+  },
+  {
+    name: "UV",
+    key: "uv_index",
+  },
+  {
+    name: "Pollen",
+    key: "grass_pollen",
+  },
+];
 
 export default Overview;
