@@ -7,7 +7,7 @@ export const airQualityComment = (aqi: number): string =>{
     if(Math.abs(aqi) < values[0]){
         return "Fair"
     }else if(Math.abs(aqi) < values[1]){
-        return "Alright"
+        return "Medium"
     }else{
         console.log(Math.abs(aqi) + " < " + values[2]);
         result = "Poor"
