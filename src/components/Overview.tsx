@@ -7,6 +7,7 @@ import { AirData } from '../types/airData';
 import { useLocation } from './App';
 import { airQualityComment } from '../utils/airQualityComment';
 import logo from './logo.png';
+import BarComponent from './BarComponent';
 
 function Overview() {
     const { location, lat, long} = useLocation();
