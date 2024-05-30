@@ -37,7 +37,7 @@ function Overview() {
     return (
         <div id="template-text">
 
-          <div className="flex float-right">
+          <div className="flex justify-end">
             <div id="large-text"  className="mr-2">
             {location}
             </div>
