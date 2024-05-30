@@ -9,9 +9,7 @@ type BarComponentProps = {
 const BoxComponent: React.FC<BarComponentProps>= ({data}) => {
 
     let colour = "blue";
-
-    let height;
-    height = Number(data) * 7;
+    const height = Number(data) * 7;
 
     const rating = airQualityComment(Number(data));
     if (rating === 'Fair') {
