@@ -1,3 +1,10 @@
+export type VariableKey = "pm10" | "pm2_5" | "carbon_monoxide" | "nitrogen_dioxide" | "sulphur_dioxide" | "ozone" | "uv_index" | "grass_pollen";
+
+export type Variable = {
+  name: string;
+  key: VariableKey;
+}
+
 interface Current {
     carbon_monoxide: number,
     european_aqi: number,

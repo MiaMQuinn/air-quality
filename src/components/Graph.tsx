@@ -5,33 +5,45 @@ import { useLocation } from './App';
 import { useEffect } from 'react';
 import BarComponent from './BarComponent';
 import leftArrow from './leftArrow.svg';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import logo from './logo.png';
+import { AirData, VariableKey } from '../types/airData';
 
 function Graph() {
+    const { weatherVariable } = useParams() as { weatherVariable: VariableKey };
     const { location, lat, long} = useLocation();
     const [hourlyData, setHourlyData] = React.useState<number[] | string[] | undefined>();
     const [hours, setHours] = React.useState<string[] | undefined>();
 
-    console.log("location: " + location);
+    const getHourlyData = (airData: AirData, variableName: VariableKey) => {
+        if (variableName && airData?.hourly) {
+          return airData.hourly[variableName]
+        }
+  
+        return;
+      };
+
     useEffect(() => {
         if (!lat || !long) {
           return;
         }
         const fetchHourlyAirData = async () => {
           try {
-            const fetchedAirData = await airService.getHourly(lat, long, "european_aqi");
-            const hours = fetchedAirData?.hourly?.time;
-            const times = hours?.map(getTwelveHourTime);
-            setHours(times);
-            setHourlyData(fetchedAirData.hourly?.european_aqi);
-            setHours(times);
+            if (weatherVariable) {
+                const fetchedAirData = await airService.getHourly(lat, long, weatherVariable);
+                console.log('Hourly data: ', fetchedAirData);
+                const hours = fetchedAirData?.hourly?.time;
+                const times = hours?.map(getTwelveHourTime);
+                setHours(times);
+                setHourlyData(getHourlyData(fetchedAirData, weatherVariable));
+                setHours(times);
+            }
            } catch (e) {
             console.log('Error fetching hourly data');
           }
         };
         fetchHourlyAirData();
-      }, [lat, long]);
+      }, [lat, long, weatherVariable]);
 
     return (
         <div id="template-text"> 
@@ -51,7 +63,7 @@ function Graph() {
                         const hour = hours? hours[index]: "";
                         return (
                             <div className="text-center text-gray-600 ">
-                                <BarComponent data={item} /> 
+                                <BarComponent data={item} variableKey={weatherVariable}/> 
                                 {hour}
                             </div>
                         );

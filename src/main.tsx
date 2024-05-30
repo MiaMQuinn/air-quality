@@ -21,7 +21,7 @@ const router = createBrowserRouter([
       },
       {
         path: ':weatherVariable',
-        element: <SingleVariable />
+        element: <Graph />
       },      {
         path: 'graph',
         element: <Graph />

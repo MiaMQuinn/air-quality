@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as airService from '../services/air';
 import BoxComponent from './BoxComponent';
 import { changeColour } from '../utils/changeColour';
-import { AirData } from '../types/airData';
+import { AirData, Variable, VariableKey } from '../types/airData';
 import { useLocation } from './App';
 import { airQualityComment } from '../utils/airQualityComment';
 import logo from './logo.png';
@@ -74,13 +74,6 @@ function Overview() {
         </div>
         </div>
       );
-}
-
-type VariableKey = "pm10" | "pm2_5" | "carbon_monoxide" | "nitrogen_dioxide" | "sulphur_dioxide" | "ozone" | "uv_index" | "grass_pollen";
-
-type Variable = {
-  name: string;
-  key: VariableKey;
 }
 
 const subVariables: Variable[] = [
