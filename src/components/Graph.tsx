@@ -8,7 +8,7 @@ import leftArrow from './leftArrow.svg';
 import { Link, useParams } from 'react-router-dom';
 import logo from './logo.png';
 import { AirData, VariableKey } from '../types/airData';
-import { pollutantNameDictionary } from '../utils/pollutantDictionary';
+import { pollutantDescriptionDictionary, pollutantNameDictionary } from '../utils/pollutantDictionary';
 
 function Graph() {
     const { weatherVariable } = useParams() as { weatherVariable: VariableKey };
@@ -90,6 +90,10 @@ function Graph() {
                 <hr className="my-20 h-0.5 border-t-0 dark:bg-white/10" />
                 <div className="text-8xl text-gray-600 font-bold m-auto">
                     {pollutantNameDictionary[weatherVariable]}
+                </div>
+                <hr className="my-4 h-0.5 border-t-0 dark:bg-white/10" />
+                <div className='text-gray-600 text-center'>
+                {pollutantDescriptionDictionary[weatherVariable]}
                 </div>
             </div>
         </div>
