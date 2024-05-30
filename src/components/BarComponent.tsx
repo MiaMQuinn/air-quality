@@ -11,7 +11,7 @@ const BoxComponent: React.FC<BarComponentProps>= ({data}) => {
     let colour = "blue";
     const height = Number(data) * 7;
 
-    const rating = airQualityComment(Number(data));
+    const rating = airQualityComment("european_aqi", Number(data));
     if (rating === 'Fair') {
         colour = '#50CCAA';
     } else if (rating === 'Medium') {
@@ -21,7 +21,7 @@ const BoxComponent: React.FC<BarComponentProps>= ({data}) => {
     }
 
     return (
-        <div style={{backgroundColor:colour}} className="rounded-lg flex flex-col items-center">
+        <div style={{backgroundColor:colour}} className="rounded-t-lg">
             <div style={{height:height}} className='square'></div>
         </div>
     );

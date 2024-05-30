@@ -1,15 +1,15 @@
 import {pollutantDictionary} from './pollutantDictionary';
 
-export const airQualityComment = (aqi: number|undefined) =>{
-    const values = pollutantDictionary["european_aqi"];
+export const airQualityComment = (pollutant: string, value: number | undefined) =>{
+    const values = pollutantDictionary[pollutant];
     let result = "test";
 
-    if(aqi && aqi < values[0]){
+    if(value && value < values[0]){
         return "Fair"
-    }else if(aqi && aqi < values[1]){
+    }else if(value && value < values[1]){
         return "Medium"
     }else{
-        console.log(aqi + " < " + values[2]);
+        console.log(value + " < " + values[2]);
         result = "Poor"
     }
 

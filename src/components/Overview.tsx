@@ -54,7 +54,7 @@ function Overview() {
             {airData?.current?.european_aqi}
           </div>
           <div style={{color:changeColour("european_aqi", airData?.current?.european_aqi)}}className="inter-font text-3xl font-bold m-auto">
-            {airQualityComment(airData?.current?.european_aqi)}
+            {airQualityComment("european_aqi", airData?.current?.european_aqi)}
           </div>
           <div id="large-text" className="inter-font m-auto">
             Air quality
@@ -115,7 +115,7 @@ const subVariables: Variable[] = [
   {
     name: "Pollen",
     key: "grass_pollen",
-  },
+  }
 ];
 
 export default Overview;
