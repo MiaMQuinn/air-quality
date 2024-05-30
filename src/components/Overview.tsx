@@ -7,6 +7,7 @@ import { useLocation } from './App';
 import { airQualityComment } from '../utils/airQualityComment';
 import logo from './logo.png';
 import { Link } from 'react-router-dom';
+import barChart from './barChart.svg';
 
 function Overview() {
     const { location, lat, long} = useLocation();
@@ -38,6 +39,11 @@ function Overview() {
 
     return (
         <div id="template-text">
+
+          <Link to={'/Graph'}>
+            <img src={barChart} width={25} height={25} />
+          </Link>
+
           <div className="flex float-right">
             <div id="large-text"  className="mr-2">
             {location}

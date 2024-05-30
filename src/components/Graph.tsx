@@ -4,6 +4,8 @@ import { getTwelveHourTime } from '../utils/getTwelveHourTime';
 import { useLocation } from './App';
 import { useEffect } from 'react';
 import BarComponent from './BarComponent';
+import leftArrow from './leftArrow.svg';
+import { Link } from 'react-router-dom';
 
 function Graph() {
     const { location, lat, long} = useLocation();
@@ -31,16 +33,22 @@ function Graph() {
       }, [lat, long]);
 
     return (
-        <div className='grid grid-cols-10 space-x-4'>
-            {hourlyData?.map((item, index) => {
-                const hour = hours? hours[index]: "";
-                return (
-                    <div className="text-center">
-                        <BarComponent data={item} /> 
-                        {hour}
-                    </div>
-                );
-            })}
+        <div>
+            <Link to={'/'}>
+                <img src={leftArrow} width={25} height={25} />
+            </Link>
+            
+            <div className='grid grid-cols-10 space-x-4'>
+                {hourlyData?.map((item, index) => {
+                    const hour = hours? hours[index]: "";
+                    return (
+                        <div className="text-center">
+                            <BarComponent data={item} /> 
+                            {hour}
+                        </div>
+                    );
+                })}
+            </div>
         </div>
     )
 }
