@@ -12,7 +12,6 @@ import barChart from './barChart.svg';
 function Overview() {
     const { location, lat, long} = useLocation();
     const [airData, setAirData] = React.useState<AirData|null>(null);
-    const [airQuality, setAirQuality] = React.useState<number>();
     console.log(location, lat, long);
 
     React.useEffect(() => {
@@ -20,7 +19,6 @@ function Overview() {
             try {
               const fetchedAirData = await airService.getAll(lat, long);
               setAirData(fetchedAirData);
-              setAirQuality(airData?.current?.european_aqi);
             } catch (e) {
               console.log('Error fetching air data');
             }
@@ -40,25 +38,23 @@ function Overview() {
     return (
         <div id="template-text">
 
-          <Link to={'/Graph'}>
-            <img src={barChart} width={25} height={25} />
-          </Link>
-
           <div className="flex float-right">
             <div id="large-text"  className="mr-2">
             {location}
             </div>
             <img src={logo} width={25} height={25} />
-
           </div>
-          
+
+          <Link to={'/Graph'}>
+            <img src={barChart} width={25} height={25} />
+          </Link>
     
         <div className="grid grid-cols-1 m-20">
           <div style={{color:changeColour("european_aqi", airData?.current?.european_aqi)}} className="text-9xl font-bold m-auto">
             {airData?.current?.european_aqi}
           </div>
           <div style={{color:changeColour("european_aqi", airData?.current?.european_aqi)}}className="inter-font text-3xl font-bold m-auto">
-            {airQualityComment(airQuality)}
+            {airQualityComment(airData?.current?.european_aqi)}
           </div>
           <div id="large-text" className="inter-font m-auto">
             Air quality
