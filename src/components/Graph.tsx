@@ -10,17 +10,25 @@ function Graph() {
     const [hourlyData, setHourlyData] = React.useState<number[] | string[] | undefined>();
     const [hours, setHours] = React.useState<string[] | undefined>();
 
+    console.log("location: " + location);
     useEffect(() => {
-        const getAllData = async () => {
-            const fetchedHourlyData = await airService.getHourly(lat, long, "european_aqi");
-            console.log(fetchedHourlyData);
-            const hours = fetchedHourlyData?.hourly?.time;
-            const times = hours?.map(getTwelveHourTime);
-            setHourlyData(fetchedHourlyData.hourly?.european_aqi);
-            setHours(times);
+        if (!lat || !long) {
+          return;
         }
-        getAllData();
-    },[])
+        const fetchHourlyAirData = async () => {
+          try {
+            const fetchedAirData = await airService.getHourly(lat, long, "european_aqi");
+            const hours = fetchedAirData?.hourly?.time;
+            const times = hours?.map(getTwelveHourTime);
+            setHours(times);
+            setHourlyData(fetchedAirData.hourly?.european_aqi);
+            setHours(times);
+           } catch (e) {
+            console.log('Error fetching hourly data');
+          }
+        };
+        fetchHourlyAirData();
+      }, [lat, long]);
 
     return (
         <div className='grid grid-cols-10 space-x-4'>
@@ -34,7 +42,7 @@ function Graph() {
                 );
             })}
         </div>
-      );
+    )
 }
 
 export default Graph;
