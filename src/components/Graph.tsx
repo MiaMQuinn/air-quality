@@ -34,7 +34,7 @@ function Graph() {
 
     return (
         <div> 
-            <div className='mt-4 ml-4'>
+            <div className='mt-4 ml-5'>
                 <Link to={'/'}>
                     <img src={leftArrow} width={25} height={25} />
                 </Link>
