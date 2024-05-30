@@ -39,17 +39,25 @@ function Graph() {
                     <img src={leftArrow} width={25} height={25} />
                 </Link>
             </div>
-            <div className='m-40'>
+            <div className="grid grid-cols-1 m-40">
                 <div className='grid grid-cols-10 space-x-4 items-end'>
                     {hourlyData?.map((item, index) => {
                         const hour = hours? hours[index]: "";
                         return (
-                            <div className="text-center">
+                            <div className="text-center text-gray-600 ">
                                 <BarComponent data={item} /> 
                                 {hour}
                             </div>
                         );
                     })}
+                </div>
+                
+                <hr className="my-20 h-0.5 border-t-0 dark:bg-white/10" />
+                <div className="text-8xl text-gray-600 font-bold m-auto">
+                    UV Index
+                </div>
+                <div className="ml-60 mr-60 mt-10 text-gray-500">
+                    The UV Index is a measure of the intensity of ultraviolet radiation from the sun at the Earth's surface. It provides important information to help people prevent overexposure to UV rays, which can lead to sunburns, premature aging of the skin, and an increased risk of skin cancer.
                 </div>
             </div>
         </div>
