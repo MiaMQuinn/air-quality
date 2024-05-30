@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import BarComponent from './BarComponent';
 import leftArrow from './leftArrow.svg';
 import { Link } from 'react-router-dom';
+import logo from './logo.png';
 
 function Graph() {
     const { location, lat, long} = useLocation();
@@ -33,12 +34,17 @@ function Graph() {
       }, [lat, long]);
 
     return (
-        <div> 
-            <div className='mt-4 ml-5'>
-                <Link to={'/'}>
-                    <img src={leftArrow} width={25} height={25} />
-                </Link>
+        <div id="template-text"> 
+            <div className="flex float-right">
+                <div id="large-text"  className="mr-2">
+                {location}
+                </div>
+                <img src={logo} width={25} height={25} />
             </div>
+
+            <Link to={'/'}>
+                <img src={leftArrow} width={25} height={25} />
+            </Link>
             <div className="grid grid-cols-1 m-40">
                 <div className='grid grid-cols-10 space-x-4 items-end'>
                     {hourlyData?.map((item, index) => {
