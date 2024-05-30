@@ -23,11 +23,11 @@ function Graph() {
     },[])
 
     return (
-         <div>
+        <div className='grid grid-cols-10 space-x-4'>
             {hourlyData?.map((item, index) => {
                 const hour = hours? hours[index]: "";
                 return (
-                    <div>
+                    <div className="text-center">
                         <BarComponent data={item} /> 
                         {hour}
                     </div>

@@ -23,8 +23,8 @@ const BoxComponent: React.FC<BarComponentProps>= ({data}) => {
     }
 
     return (
-        <div style={{backgroundColor:colour}} className="bg-red-600 rounded-lg flex flex-col items-center">
-            <div className="text-4xl text-gray-700 font-bold pt-5">{data}</div>
+        <div style={{backgroundColor:colour}} className="rounded-lg flex flex-col items-center">
+            <div className='square'></div>
         </div>
     );
 }

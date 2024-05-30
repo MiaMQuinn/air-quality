@@ -1,8 +1,8 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-@import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lilita+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lilita+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lilita+One&display=swap");
 
 /*
   1. Use a more-intuitive box-sizing model.
@@ -75,19 +75,19 @@ h6 {
   padding: 0;
 }
 
-#small-text{
+#small-text {
   @apply text-sm;
-  @apply text-gray-600
+  @apply text-gray-600;
 }
 
-#default-text{
+#default-text {
   @apply text-base;
-  @apply text-gray-600
+  @apply text-gray-600;
 }
 
-#large-text{
+#large-text {
   @apply text-lg;
-  @apply text-gray-600
+  @apply text-gray-600;
 }
 
 .lilita-one-regular {
@@ -103,6 +103,10 @@ h6 {
   font-optical-sizing: auto;
   font-weight: 700;
   font-style: normal;
-  font-variation-settings:
-    "slnt" 0;
+  font-variation-settings: "slnt" 0;
+}
+
+.square {
+  width: 5vh;
+  height: 5vh;
 }
