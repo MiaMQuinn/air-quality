@@ -8,20 +8,32 @@ import leftArrow from './leftArrow.svg';
 import { Link, useParams } from 'react-router-dom';
 import logo from './logo.png';
 import { AirData, VariableKey } from '../types/airData';
+import { pollutantNameDictionary } from '../utils/pollutantDictionary';
 
 function Graph() {
     const { weatherVariable } = useParams() as { weatherVariable: VariableKey };
     const { location, lat, long} = useLocation();
     const [hourlyData, setHourlyData] = React.useState<number[] | string[] | undefined>();
+    const [normalizedData, setNormalizedData] = React.useState<number[]>([]);
     const [hours, setHours] = React.useState<string[] | undefined>();
 
     const getHourlyData = (airData: AirData, variableName: VariableKey) => {
         if (variableName && airData?.hourly) {
-          return airData.hourly[variableName]
+            return airData.hourly[variableName]
         }
-  
+
         return;
-      };
+    };
+    
+    const normalize = (data: number[] | string[] | undefined) => {
+        if (!data) {
+            return;
+        }
+
+        data = data.map(val => Number(val));
+        const total = data.reduce((acc, curr) => acc + curr);
+        return data.map(val => val / total);
+    }
 
     useEffect(() => {
         if (!lat || !long) {
@@ -35,7 +47,12 @@ function Graph() {
                 const hours = fetchedAirData?.hourly?.time;
                 const times = hours?.map(getTwelveHourTime);
                 setHours(times);
-                setHourlyData(getHourlyData(fetchedAirData, weatherVariable));
+                const unnormalizedData = getHourlyData(fetchedAirData, weatherVariable);
+                const normalizedData = normalize(unnormalizedData);
+                setHourlyData(unnormalizedData);
+                if (normalizedData) {
+                    setNormalizedData(normalizedData);
+                }
                 setHours(times);
             }
            } catch (e) {
@@ -63,7 +80,7 @@ function Graph() {
                         const hour = hours? hours[index]: "";
                         return (
                             <div className="text-center text-gray-600 ">
-                                <BarComponent data={item} variableKey={weatherVariable}/> 
+                                <BarComponent data={item} normalizedData={normalizedData[index]} variableKey={weatherVariable}/> 
                                 {hour}
                             </div>
                         );
@@ -72,10 +89,7 @@ function Graph() {
                 
                 <hr className="my-20 h-0.5 border-t-0 dark:bg-white/10" />
                 <div className="text-8xl text-gray-600 font-bold m-auto">
-                    UV Index
-                </div>
-                <div className="ml-60 mr-60 mt-10 text-gray-500">
-                    The UV Index is a measure of the intensity of ultraviolet radiation from the sun at the Earth's surface. It provides important information to help people prevent overexposure to UV rays, which can lead to sunburns, premature aging of the skin, and an increased risk of skin cancer.
+                    {pollutantNameDictionary[weatherVariable]}
                 </div>
             </div>
         </div>

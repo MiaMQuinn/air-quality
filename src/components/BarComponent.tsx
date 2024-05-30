@@ -6,12 +6,13 @@ import { VariableKey } from '../types/airData';
 type BarComponentProps = {
     data: string | number;
     variableKey: VariableKey;
+    normalizedData: number;
 }
 
-const BoxComponent: React.FC<BarComponentProps>= ({ data, variableKey }) => {
+const BoxComponent: React.FC<BarComponentProps>= ({ data, normalizedData, variableKey }) => {
 
     let colour = "blue";
-    const height = Number(data) * 7;
+    const height = Number(normalizedData) * 1000;
 
     const rating = airQualityComment(variableKey, Number(data));
     if (rating === 'Fair') {

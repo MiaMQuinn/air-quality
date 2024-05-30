@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 
 function SingleVariable() {
   const { weatherVariable } = useParams();
-  const { location, lat, long } = useLocation();
+  const { lat, long } = useLocation();
   const [hourlyData, setHourlyData] = React.useState<AirData | null>(null);
   console.log(hourlyData);
 

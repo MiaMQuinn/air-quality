@@ -7,7 +7,6 @@ import { useLocation } from './App';
 import { airQualityComment } from '../utils/airQualityComment';
 import logo from './logo.png';
 import { Link } from 'react-router-dom';
-import barChart from './barChart.svg';
 
 function Overview() {
     const { location, lat, long} = useLocation();
@@ -44,10 +43,6 @@ function Overview() {
             </div>
             <img src={logo} width={25} height={25} />
           </div>
-
-          <Link to={'/Graph'}>
-            <img src={barChart} width={25} height={25} />
-          </Link>
     
         <div className="grid grid-cols-1 m-20">
           <div style={{color:changeColour("european_aqi", airData?.current?.european_aqi)}} className="text-9xl font-bold m-auto">
